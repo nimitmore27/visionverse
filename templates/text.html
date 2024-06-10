@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block csslinks %}
+{% endblock %}
+
+{% set home = '' %}
+{% set text = 'active' %}
+{% set image = '' %}
+
+{% block body %}
+<div class="container my-4">
+	<p class="lead text-center">Analyze text with ease using our advanced algorithms.</p>
+	<form action="/analyzeText" method="post" id="textform">
+		<div class="form-group">
+			<label for="user_input_text">Enter Your Text</label>
+			<textarea class="form-control" id="user_input_text" rows="3" name="textinput"></textarea>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="userChoice" id="spamInput" value="spam" checked>
+			<label class="form-check-label" for="spamInput">
+				Spam Detection
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="userChoice" id="semtimentInput" value="sentiment">
+			<label class="form-check-label" for="semtimentInput">
+				Sentiment Analysis
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="userChoice" id="stressInput" value="stress">
+			<label class="form-check-label" for="stressInput">
+				Stress Detection
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="userChoice" id="hateInput" value="offense">
+			<label class="form-check-label" for="hateInput">
+				Hate & Offensive Speech Detection
+			</label>
+		</div>
+		<div class="form-check">
+			<input class="form-check-input" type="radio" name="userChoice" id="sarcasmInput" value="sarcasm">
+			<label class="form-check-label" for="sarcasmInput">
+				Sarcastic Detection
+			</label>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+<div class="container">
+	<div class="alert alert-primary text-center" role="alert" id="resultDiv">
+		{% if params.result == 'default' %}
+		Your Result Will Be Shown Here
+		{% else %}
+		{{ params.result }}
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static',filename='js/text.js') }}"></script>
+{% endblock %}
